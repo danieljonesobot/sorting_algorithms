@@ -25,6 +25,6 @@ void print_list(const listint_t *list);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
-int lomuto_partition(int *array, int low, int high, size_t size);
-void quick_sort_helper(int *array, int low, int high, size_t size);
+void swap_elements(int *arr, size_t left, size_t right);
+void qsrl(int *arr, size_t lw, size_t hh, size_t se);
 #endif
