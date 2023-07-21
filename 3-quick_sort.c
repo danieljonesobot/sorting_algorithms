@@ -1,52 +1,52 @@
 #include "sort.h"
 
 /**
- * swap_elements - Swaps two elements indice in the array.
- * @arr: The array of the swapped elements.
- * @left: left element to swap.
- * @right: right element to swap.
+ * swap_elements - Swaps two elements in the array.
+ * @arr: The array in which elements are swapped.
+ * @left: The index of the first element to be swapped.
+ * @right: The index of the second element to be swapped.
  */
 void swap_elements(int *arr, size_t left, size_t right)
 {
-    int tmp;
-
-    if (arr != NULL)
-    {
-        tmp = arr[left];
-        arr[left] = arr[right];
-        arr[right] = tmp;
-    }
+	int tempo;
+	
+	if (arr != NULL)
+	{
+		tempo = arr[left];
+		arr[left] = arr[right];
+		arr[right] = tempo;
+	};
 }
 
 /**
- * qsrl - uses the quicksort_algorithm and Lomuto's partition to sort a sub array.
- * @arr: The sub-array to be sorted.
- * @lw: low.
- * @hh: high.
- * @se:  size(len) of the array.
+ * qsrl - uses the quicksort with Lomuto's partition to sort a subarray.
+ * @arr: The array with sub-array .
+ * @lw: initial pos of the subarray.
+ * @hh: last position of the subarray.
+ * @se: size of the array.
  */
 void qsrl(int *arr, size_t lw, size_t hh, size_t se)
 {
     size_t partition_index = lw;
+    size_t i;
     int pivot;
 
-    if ((lw >= hh) || (arr == NULL))
+    if (lw >= hh)
         return;
 
     pivot = arr[hh];
 
-    while (lw < hh)
+    for (i = lw; i < hh; i++)
     {
-        if (arr[lw] <= pivot)
+        if (arr[i] <= pivot)
         {
-            if (partition_index != lw)
+            if (partition_index != i)
             {
-                swap_elements(arr, partition_index, lw);
+                swap_elements(arr, partition_index, i);
                 print_array(arr, se);
             }
             partition_index++;
         }
-        lw++;
     }
 
     if (partition_index != hh)
@@ -55,22 +55,22 @@ void qsrl(int *arr, size_t lw, size_t hh, size_t se)
         print_array(arr, se);
     }
 
-    if (partition_index - lw > 1)
+    if (partition_index > 0)
         qsrl(arr, lw, partition_index - 1, se);
 
-    if (hh - partition_index > 1)
-        qsrl(arr, partition_index + 1, hh, se);
+    qsrl(arr, partition_index + 1, hh, se);
 }
 
 /**
- * quick_sort - uses quick sort to sort an array with Lomuto's partition .
+ * quick_sort - uses the quicksort Lomuto's partition .
  * @array: The array to be sorted.
  * @size: size of the array.
  */
 void quick_sort(int *array, size_t size)
 {
-    if (array != NULL)
+    if (array != NULL && size > 1)
     {
         qsrl(array, 0, size - 1, size);
     }
 }
+
